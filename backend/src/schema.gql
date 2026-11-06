@@ -1,0 +1,61 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type RouteEntity {
+  id: ID!
+  origin: String!
+  destination: String!
+  distance: Float!
+  duration: Float!
+  encodedPolyline: String!
+  createdAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type CoordinateModel {
+  latitude: Float!
+  longitude: Float!
+}
+
+type RouteModel {
+  id: ID!
+  origin: String!
+  destination: String!
+
+  """Distância total da rota em quilômetros"""
+  distance: Float!
+
+  """Tempo estimado da rota em minutos"""
+  duration: Float!
+
+  """Polyline codificada retornada pela Google Directions API"""
+  encodedPolyline: String!
+
+  """Lista de coordenadas da rota"""
+  coordinates: [CoordinateModel!]!
+  createdAt: DateTime!
+}
+
+type Query {
+  routes: [RouteEntity!]!
+  route(id: String!): RouteEntity!
+}
+
+type Mutation {
+  calculateRoute(input: CreateRouteInput!): RouteModel!
+  saveRoute(input: CreateRouteInput!): RouteEntity!
+  removeRoute(id: String!): Boolean!
+}
+
+input CreateRouteInput {
+  """Endereço de origem da rota"""
+  origin: String!
+
+  """Endereço de destino da rota"""
+  destination: String!
+}
