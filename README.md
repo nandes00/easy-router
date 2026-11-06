@@ -1,6 +1,5 @@
 ﻿
-# 🚀 RouterEasy - FullStack Challenge
-
+# 🚀 RouterEasy 
 Aplicação FullStack para cálculo, visualização e persistência de rotas utilizando:
 
 - NestJS (GraphQL + TypeORM)
