@@ -16,8 +16,10 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
+    "test:cov:routes": "jest --coverage --collectCoverageFrom='modules/routes/{routes.service,gateways/*,enums/*,utils/*}.ts' --collectCoverageFrom='!**/*.spec.ts'",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:integration": "jest --config ./test/jest-e2e.json --testPathPatterns routes.e2e-spec"
   },
   "dependencies": {
     "@apollo/server": "^5.5.1",
