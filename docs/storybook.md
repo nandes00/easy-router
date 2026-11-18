@@ -24,7 +24,7 @@ Storybook será utilizado para documentar visualmente os componentes Vue.
 ## Instalação
 
 ```bash
-cd frontend/routermini-web
+cd frontend/easyrouter-web
 npx storybook@latest init
 ```
 

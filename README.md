@@ -242,7 +242,7 @@ Backend GraphQL: http://localhost:3000/graphql
 ### Backend local
 
 ```bash
-cd backend/routermini-api
+cd backend/easyrouter-api
 npm install
 npm run start:dev
 ```
@@ -250,7 +250,7 @@ npm run start:dev
 ### Frontend local
 
 ```bash
-cd frontend/routermini-web
+cd frontend/easyrouter-web
 npm install
 npm run dev
 ```
