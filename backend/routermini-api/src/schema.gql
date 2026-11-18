@@ -1,0 +1,87 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type RoutePointType {
+  sequence: Int!
+  lat: Float!
+  lng: Float!
+}
+
+type CalculatedRouteType {
+  originAddress: String!
+  destinationAddress: String!
+  distanceKm: Float!
+  durationText: String!
+  encodedPolyline: String!
+  points: [RoutePointType!]!
+}
+
+type RouteType {
+  id: ID!
+  originAddress: String!
+  destinationAddress: String!
+  distanceKm: Float!
+  durationText: String!
+  points: [RoutePointType!]!
+  createdAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type AuthPayloadType {
+  accessToken: String!
+}
+
+type UserType {
+  id: ID!
+  name: String!
+  email: String!
+  createdAt: DateTime!
+}
+
+type Query {
+  health: String!
+  routes: [RouteType!]!
+  route(id: ID!): RouteType
+}
+
+type Mutation {
+  registerUser(input: CreateUserInput!): UserType!
+  login(input: LoginInput!): AuthPayloadType!
+  calculateRoute(input: CalculateRouteInput!): CalculatedRouteType!
+  saveRoute(input: SaveRouteInput!): RouteType!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input CalculateRouteInput {
+  originAddress: String!
+  destinationAddress: String!
+}
+
+input SaveRouteInput {
+  originAddress: String!
+  destinationAddress: String!
+  distanceKm: Float!
+  durationText: String!
+  points: [RoutePointInput!]!
+}
+
+input RoutePointInput {
+  sequence: Float!
+  lat: Float!
+  lng: Float!
+}

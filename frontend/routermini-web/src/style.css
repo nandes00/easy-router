@@ -1,0 +1,417 @@
+:root {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #172033;
+  background: #eef3f8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #eef3f8 0%, #f8fafc 100%);
+}
+
+.page {
+  width: min(1280px, 94%);
+  margin: 0 auto;
+  padding: 36px 0;
+}
+
+.hero {
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  color: #2563eb;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 8px 0;
+  font-size: 2.3rem;
+}
+
+.subtitle {
+  color: #64748b;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e5edf6;
+  border-radius: 20px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+}
+
+.sidebar {
+  padding: 24px;
+}
+
+.route-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 700;
+}
+
+input {
+  padding: 14px;
+  border: 1px solid #dbe4ef;
+  border-radius: 12px;
+  font-size: 15px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+button {
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: #2563eb;
+  color: white;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.secondary-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  margin-top: 10px;
+
+  text-decoration: none;
+  background: #0f172a;
+  color: white;
+
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 800;
+}
+
+.secondary-button:hover {
+  background: #020617;
+}
+
+.map-panel {
+  padding: 12px;
+  min-height: 620px;
+}
+
+.route-map {
+  min-height: 596px;
+}
+
+.route-summary {
+  margin-top: 24px;
+  padding-top: 22px;
+  border-top: 1px solid #e5edf6;
+  display: grid;
+  gap: 14px;
+}
+
+.summary-item {
+  padding: 14px;
+  background: #f8fafc;
+  border-radius: 14px;
+}
+
+.summary-item span {
+  display: block;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.summary-item strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.35rem;
+}
+
+.error {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.success {
+  color: #16a34a;
+  font-weight: 800;
+}
+
+@media (max-width: 900px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .map-panel {
+    min-height: 440px;
+  }
+
+  .route-map {
+    min-height: 420px;
+  }
+}
+
+/* Custom styles for the Google Maps API elements */
+
+.saved-layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 24px;
+}
+
+.saved-list {
+  padding: 20px;
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.route-list-item {
+  text-align: left;
+  background: #f8fafc;
+  color: #172033;
+  border: 1px solid #e5edf6;
+  display: grid;
+  gap: 6px;
+}
+
+.route-list-item:hover {
+  background: #eef3f8;
+}
+
+.route-list-item span {
+  color: #475569;
+}
+
+.route-list-item small {
+  color: #64748b;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .saved-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Custom styles for the Google Maps API elements  saved routes */
+
+.route-list-item.active {
+  background: #dbeafe;
+  border-color: #2563eb;
+}
+
+.route-detail {
+  padding: 12px;
+}
+
+.selected-info {
+  padding: 14px 14px 20px;
+}
+
+.selected-info h2 {
+  font-size: 1.2rem;
+}
+
+.selected-info p {
+  margin-top: 4px;
+  color: #64748b;
+}
+
+.detail-grid {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.detail-grid div {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.detail-grid span {
+  display: block;
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.detail-grid strong {
+  display: block;
+  margin-top: 4px;
+}
+
+.header-link {
+  width: fit-content;
+  margin-top: 16px;
+}
+/**  css style header **/
+
+.app-header {
+  width: min(1280px, 94%);
+  margin: 20px auto 0;
+  padding: 16px 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: #ffffff;
+  border: 1px solid #e5edf6;
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+}
+
+.brand {
+  text-decoration: none;
+  color: #172033;
+  font-weight: 900;
+  font-size: 1.2rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #475569;
+  font-weight: 800;
+}
+
+.nav-links a.router-link-active {
+  color: #2563eb;
+}
+
+.logout-button {
+  padding: 10px 14px;
+  background: #ef4444;
+}
+
+.logout-button:hover {
+  background: #dc2626;
+}
+
+@media (max-width: 700px) {
+  .app-header {
+    align-items: flex-start;
+    gap: 14px;
+    flex-direction: column;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+  }
+}
+
+/** name login diretamente no header **/
+.user-greeting {
+  color: #475569;
+  font-weight: 800;
+}
+
+/**  css style login page **/
+
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  align-items: center;
+  gap: 40px;
+  width: min(1100px, 92%);
+  margin: 0 auto;
+}
+
+.auth-brand h1 {
+  font-size: 3rem;
+  margin: 12px 0;
+}
+
+.auth-brand p {
+  color: #64748b;
+  max-width: 520px;
+}
+
+.auth-card {
+  background: white;
+  padding: 32px;
+  border-radius: 22px;
+  border: 1px solid #e5edf6;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.1);
+}
+
+@media (max-width: 850px) {
+  .auth-page {
+    grid-template-columns: 1fr;
+    padding: 32px 0;
+  }
+
+  .auth-brand h1 {
+    font-size: 2.2rem;
+  }
+
+  .auth-card {
+    padding: 24px;
+  }
+}
+
+/** auth layout **/
+
+.auth-link {
+  display: block;
+  text-align: center;
+  margin-top: 14px;
+  color: #2563eb;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.auth-actions {
+  margin-top: 18px;
+  text-align: center;
+}
+
+.auth-link {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
