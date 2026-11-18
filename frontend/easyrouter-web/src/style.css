@@ -415,3 +415,44 @@ button:disabled {
 .auth-link:hover {
   text-decoration: underline;
 }
+/* Seletor do motor de rota (Google / Valhalla) */
+.provider-picker {
+  margin: 0;
+  padding: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.provider-picker legend {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.provider-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 4px;
+  background: #f1f5f9;
+  border-radius: 12px;
+}
+
+.provider-option {
+  padding: 10px;
+  background: transparent;
+  color: #475569;
+  font-weight: 700;
+  border-radius: 9px;
+}
+
+.provider-option:hover {
+  background: #e2e8f0;
+}
+
+.provider-option.active {
+  background: white;
+  color: #1d4ed8;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.12);
+}

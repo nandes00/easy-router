@@ -1,5 +1,6 @@
 import { Field, Float, ObjectType } from '@nestjs/graphql';
 import { RoutePointType } from './route-point.type';
+import { RoutingProvider } from '../../enums/routing-provider.enum';
 
 @ObjectType()
 export class CalculatedRouteType {
@@ -20,4 +21,7 @@ export class CalculatedRouteType {
 
   @Field(() => [RoutePointType])
   points: RoutePointType[];
+
+  @Field(() => RoutingProvider)
+  provider: RoutingProvider;
 }

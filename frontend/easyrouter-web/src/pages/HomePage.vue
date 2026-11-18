@@ -3,7 +3,7 @@
     <header class="hero">
       <h1>Cálculo, visualização e persistência de rotas</h1>
       <p class="subtitle">
-        Informe os endereços de coleta e entrega para calcular a rota via Google Maps.
+        Informe os endereços de coleta e entrega e escolha o motor de roteirização.
       </p>
     </header>
 
@@ -15,7 +15,7 @@
             <input
               v-model="originAddress"
               type="text"
-              placeholder="Ex: Campo Grande MS"
+              placeholder="Ex: Florianópolis SC"
             />
           </label>
 
@@ -24,9 +24,27 @@
             <input
               v-model="destinationAddress"
               type="text"
-              placeholder="Ex: Aeroporto Internacional de Campo Grande MS"
+              placeholder="Ex: Aeroporto Internacional de Florianópolis SC"
             />
           </label>
+
+          <fieldset class="provider-picker">
+            <legend>Motor de rota</legend>
+            <div class="provider-options">
+              <button
+                v-for="option in providerOptions"
+                :key="option.value"
+                type="button"
+                class="provider-option"
+                :class="{ active: provider === option.value }"
+                :aria-pressed="provider === option.value"
+                :disabled="loading"
+                @click="provider = option.value"
+              >
+                {{ option.label }}
+              </button>
+            </div>
+          </fieldset>
 
           <button type="submit" :disabled="loading || !canCalculate">
             {{ loading ? 'Calculando...' : 'Calcular rota' }}
@@ -40,6 +58,11 @@
         </RouterLink>
 
         <section v-if="calculatedRoute" class="route-summary">
+          <div class="summary-item">
+            <span>Calculada via</span>
+            <strong>{{ providerLabel(calculatedRoute.provider) }}</strong>
+          </div>
+
           <div class="summary-item">
             <span>Distância</span>
             <strong>{{ calculatedRoute.distanceKm }} km</strong>
@@ -71,12 +94,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import RouteMap from '../components/route/RouteMap.vue';
-import type { CalculatedRoute } from '../types/route';
+import type { CalculatedRoute, RoutingProvider } from '../types/route';
 import {
   calculateRoute as calculateRouteService,
+  getDefaultRoutingProvider,
   saveRoute as saveRouteService,
 } from '../services/route.service';
 
@@ -89,6 +113,20 @@ const errorMessage = ref('');
 const successMessage = ref('');
 const loading = ref(false);
 const saving = ref(false);
+const provider = ref<RoutingProvider>('GOOGLE');
+
+const providerOptions: { value: RoutingProvider; label: string }[] = [
+  { value: 'GOOGLE', label: 'Google Maps' },
+  { value: 'VALHALLA', label: 'Valhalla' },
+];
+
+function providerLabel(value?: RoutingProvider) {
+  return providerOptions.find((option) => option.value === value)?.label ?? 'Google Maps';
+}
+
+onMounted(async () => {
+  provider.value = await getDefaultRoutingProvider();
+});
 
 const canCalculate = computed(
   () => originAddress.value.trim() && destinationAddress.value.trim(),
@@ -110,9 +148,11 @@ async function calculateRoute() {
     calculatedRoute.value = await calculateRouteService({
       originAddress: originAddress.value,
       destinationAddress: destinationAddress.value,
+      provider: provider.value,
     });
-  } catch {
-    errorMessage.value = 'Não foi possível calcular a rota.';
+  } catch (error) {
+    const detail = error instanceof Error && error.message ? ` ${error.message}` : '';
+    errorMessage.value = `Não foi possível calcular a rota via ${providerLabel(provider.value)}.${detail}`;
   } finally {
     loading.value = false;
   }

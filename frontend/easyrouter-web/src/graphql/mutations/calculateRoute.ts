@@ -8,6 +8,7 @@ export const CALCULATE_ROUTE_MUTATION = gql`
       distanceKm
       durationText
       encodedPolyline
+      provider
       points {
         sequence
         lat

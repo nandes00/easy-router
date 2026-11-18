@@ -62,17 +62,26 @@ mutation {
 
 Calcula uma rota.
 
+O campo `provider` é opcional e escolhe o motor de roteirização:
+
+- `GOOGLE`: Routes API do Google (endereço → rota direto no Google).
+- `VALHALLA`: endereços geocodificados pela Geocoding API do Google e rota calculada pelo microserviço `track-router` (Valhalla), em `ROUTER_MS_URL`.
+
+Sem `provider`, vale o `ROUTING_PROVIDER` do `.env` do backend (padrão `GOOGLE`). A query `defaultRoutingProvider` devolve esse padrão.
+
 ```graphql
 mutation {
   calculateRoute(input: {
-    originAddress: "Campo Grande MS"
-    destinationAddress: "Aeroporto Internacional de Campo Grande MS"
+    originAddress: "Florianópolis SC"
+    destinationAddress: "Aeroporto Internacional de Florianópolis SC"
+    provider: VALHALLA
   }) {
     originAddress
     destinationAddress
     distanceKm
     durationText
     encodedPolyline
+    provider
     points {
       sequence
       lat
@@ -91,8 +100,8 @@ Salva uma rota calculada.
 ```graphql
 mutation {
   saveRoute(input: {
-    originAddress: "Campo Grande MS"
-    destinationAddress: "Aeroporto Internacional de Campo Grande MS"
+    originAddress: "Florianópolis SC"
+    destinationAddress: "Aeroporto Internacional de Florianópolis SC"
     distanceKm: 10.5
     durationText: "15 minutos"
     points: [

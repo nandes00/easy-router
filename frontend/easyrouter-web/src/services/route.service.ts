@@ -2,16 +2,20 @@ import { apolloClient } from '../apollo/client';
 import { CALCULATE_ROUTE_MUTATION } from '../graphql/mutations/calculateRoute';
 import { SAVE_ROUTE_MUTATION } from '../graphql/mutations/saveRoute';
 import { ROUTES_QUERY } from '../graphql/queries/routes';
+import { DEFAULT_ROUTING_PROVIDER_QUERY } from '../graphql/queries/defaultRoutingProvider';
 import type {
   CalculateRouteResponse,
   CalculatedRoute,
+  DefaultRoutingProviderResponse,
   RoutesResponse,
+  RoutingProvider,
   SaveRouteResponse,
 } from '../types/route';
 
 export async function calculateRoute(input: {
   originAddress: string;
   destinationAddress: string;
+  provider?: RoutingProvider;
 }): Promise<CalculatedRoute> {
   const { data } = await apolloClient.mutate<CalculateRouteResponse>({
     mutation: CALCULATE_ROUTE_MUTATION,
@@ -57,4 +61,16 @@ export async function listRoutes() {
   });
 
   return data.routes;
+}
+/** Provider padrão configurado no backend (ROUTING_PROVIDER). Em caso de erro, GOOGLE. */
+export async function getDefaultRoutingProvider(): Promise<RoutingProvider> {
+  try {
+    const { data } = await apolloClient.query<DefaultRoutingProviderResponse>({
+      query: DEFAULT_ROUTING_PROVIDER_QUERY,
+      fetchPolicy: 'network-only',
+    });
+    return data?.defaultRoutingProvider ?? 'GOOGLE';
+  } catch {
+    return 'GOOGLE';
+  }
 }

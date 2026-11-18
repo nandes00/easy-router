@@ -3,6 +3,7 @@ import { CalculatedRouteType } from '../types/calculated-route.type';
 import { SaveRouteInput } from '../inputs/save-route.input';
 import { RouteType } from '../types/route.type';
 import { RoutesService } from '../../routes.service';
+import { RoutingProvider } from '../../enums/routing-provider.enum';
 
 // import guards in routes operations
 import { UseGuards } from '@nestjs/common';
@@ -17,6 +18,11 @@ export class RoutesResolver {
   @Query(() => String)
   health(): string {
     return this.routesService.health();
+  }
+
+  @Query(() => RoutingProvider, { description: 'Provider usado quando calculateRoute não informa um' })
+  defaultRoutingProvider(): RoutingProvider {
+    return this.routesService.defaultProvider();
   }
 
   @Mutation(() => CalculatedRouteType)

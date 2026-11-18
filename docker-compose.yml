@@ -35,6 +35,12 @@ services:
       JWT_SECRET: easyrouter_dev_secret
       JWT_EXPIRES_IN: 1d
       GOOGLE_MAPS_API_KEY: ${GOOGLE_MAPS_API_KEY}
+      # Provider padrão quando o front não escolhe: GOOGLE | VALHALLA
+      ROUTING_PROVIDER: ${ROUTING_PROVIDER:-GOOGLE}
+      # Microserviço track-router (Valhalla) rodando na sua máquina, porta 3001
+      ROUTER_MS_URL: ${ROUTER_MS_URL:-http://host.docker.internal:3001}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   frontend:
     build:

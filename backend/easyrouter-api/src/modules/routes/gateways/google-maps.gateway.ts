@@ -1,9 +1,20 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import * as polyline from '@mapbox/polyline';
 import { CalculateRouteInput } from '../graphql/inputs/calculate-route.input';
 import { CalculatedRouteType } from '../graphql/types/calculated-route.type';
+import { RoutingProvider } from '../enums/routing-provider.enum';
+
+const ROUTES_API_URL = 'https://routes.googleapis.com/directions/v2:computeRoutes';
+
+// Campos que queremos receber (obrigatório na Routes API)
+const FIELD_MASK = [
+  'routes.distanceMeters',
+  'routes.duration',
+  'routes.polyline.encodedPolyline',
+  'routes.localizedValues',
+].join(',');
 
 @Injectable()
 export class GoogleMapsGateWay {
@@ -16,40 +27,53 @@ export class GoogleMapsGateWay {
       throw new InternalServerErrorException('Google Maps API key não configurada.');
     }
 
-    const url = 'https://maps.googleapis.com/maps/api/directions/json';
+    let data: any;
+    try {
+      const response = await axios.post(
+          ROUTES_API_URL,
+          {
+            origin: { address: input.originAddress },
+            destination: { address: input.destinationAddress },
+            travelMode: 'DRIVE',
+            languageCode: 'pt-BR',
+            units: 'METRIC',
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Goog-Api-Key': apiKey,
+              'X-Goog-FieldMask': FIELD_MASK,
+            },
+          },
+      );
+      data = response.data;
+    } catch (error) {
+      const err = error as AxiosError<any>;
+      const message = err.response?.data?.error?.message ?? err.message;
+      throw new InternalServerErrorException(`Erro ao consultar Google Maps: ${message}`);
+    }
 
-    // chamada para api
-    const response = await axios.get(url, {
-      params: {
-        origin: input.originAddress,
-        destination: input.destinationAddress,
-        mode: 'driving',
-        language: 'pt-BR',
-        key: apiKey,
-      },
-    });
-
-    if (response.data.status !== 'OK') {
+    // Quando não encontra rota, a Routes API devolve {} (sem "routes")
+    const route = data?.routes?.[0];
+    if (!route) {
       throw new InternalServerErrorException(
-        `Erro ao consultar Google Maps: ${response.data.status}`,
+          'Nenhuma rota encontrada entre os endereços informados.',
       );
     }
 
-    const route = response.data.routes[0];
-    const leg = route.legs[0];
+    const encodedPolyline: string = route.polyline.encodedPolyline;
 
-    const encodedPolyline = route.overview_polyline.points;
-
-    const decodedPoints = polyline.decode(encodedPolyline);
-
-    const points = decodedPoints.map(([lat, lng], index) => ({
+    const points = polyline.decode(encodedPolyline).map(([lat, lng], index) => ({
       sequence: index + 1,
       lat,
       lng,
     }));
 
-    const distanceKm = Number((leg.distance.value / 1000).toFixed(2));
-    const durationText = leg.duration.text;
+    const distanceKm = Number((route.distanceMeters / 1000).toFixed(2));
+
+    // Texto amigável ("25 min"); se não vier, monta a partir de "1234s"
+    const durationText: string =
+        route.localizedValues?.duration?.text ?? this.formatDuration(route.duration);
 
     return {
       originAddress: input.originAddress,
@@ -58,6 +82,14 @@ export class GoogleMapsGateWay {
       durationText,
       encodedPolyline,
       points,
+      provider: RoutingProvider.GOOGLE,
     };
+  }
+
+  private formatDuration(duration: string): string {
+    const totalSeconds = parseInt(duration.replace('s', ''), 10);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.round((totalSeconds % 3600) / 60);
+    return hours > 0 ? `${hours} h ${minutes} min` : `${minutes} min`;
   }
 }

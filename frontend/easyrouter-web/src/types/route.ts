@@ -1,3 +1,5 @@
+export type RoutingProvider = 'GOOGLE' | 'VALHALLA';
+
 export interface RoutePoint {
   sequence: number;
   lat: number;
@@ -11,6 +13,7 @@ export interface CalculatedRoute {
   durationText: string;
   encodedPolyline: string;
   points: RoutePoint[];
+  provider?: RoutingProvider;
 }
 
 export interface CalculateRouteResponse {
@@ -28,4 +31,7 @@ export interface SaveRouteResponse {
 
 export interface RoutesResponse {
   routes: SavedRoute[];
+}
+export interface DefaultRoutingProviderResponse {
+  defaultRoutingProvider: RoutingProvider;
 }

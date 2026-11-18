@@ -15,6 +15,13 @@ type CalculatedRouteType {
   durationText: String!
   encodedPolyline: String!
   points: [RoutePointType!]!
+  provider: RoutingProvider!
+}
+
+"""Motor usado para calcular a rota"""
+enum RoutingProvider {
+  GOOGLE
+  VALHALLA
 }
 
 type RouteType {
@@ -47,6 +54,9 @@ type Query {
   health: String!
   routes: [RouteType!]!
   route(id: ID!): RouteType
+
+  """Provider usado quando calculateRoute não informa um"""
+  defaultRoutingProvider: RoutingProvider!
 }
 
 type Mutation {
@@ -70,6 +80,7 @@ input LoginInput {
 input CalculateRouteInput {
   originAddress: String!
   destinationAddress: String!
+  provider: RoutingProvider
 }
 
 input SaveRouteInput {

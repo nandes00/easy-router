@@ -29,7 +29,7 @@ async function initMap() {
   await importLibrary('marker');
 
   map = new Map(mapElement.value as HTMLElement, {
-    center: { lat: -20.4697, lng: -54.6201 },
+    center: { lat: -27.5954, lng: -48.5480 }, // Florianópolis - SC
     zoom: 12,
     mapTypeControl: false,
     streetViewControl: false,

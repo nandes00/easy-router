@@ -1,5 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { RoutingProvider } from '../../enums/routing-provider.enum';
 
 @InputType()
 export class CalculateRouteInput {
@@ -12,4 +13,10 @@ export class CalculateRouteInput {
   @IsString()
   @IsNotEmpty()
   destinationAddress: string;
+
+  /** Opcional: se não vier, usa ROUTING_PROVIDER do .env (padrão GOOGLE). */
+  @Field(() => RoutingProvider, { nullable: true })
+  @IsOptional()
+  @IsEnum(RoutingProvider)
+  provider?: RoutingProvider;
 }
