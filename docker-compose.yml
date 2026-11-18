@@ -3,7 +3,7 @@ services:
     image: postgis/postgis:16-3.4
     restart: always
     environment:
-      POSTGRES_DB: routermini
+      POSTGRES_DB: easyrouter
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
@@ -11,7 +11,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d routermini"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d easyrouter"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -31,8 +31,8 @@ services:
       DATABASE_PORT: 5432
       DATABASE_USER: postgres
       DATABASE_PASSWORD: postgres
-      DATABASE_NAME: routermini
-      JWT_SECRET: routermini_dev_secret
+      DATABASE_NAME: easyrouter
+      JWT_SECRET: easyrouter_dev_secret
       JWT_EXPIRES_IN: 1d
       GOOGLE_MAPS_API_KEY: ${GOOGLE_MAPS_API_KEY}
 

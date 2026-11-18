@@ -1,7 +1,7 @@
 <template>
   <main class="page">
     <header class="hero">
-      <p class="eyebrow">RouterMini</p>
+      <p class="eyebrow">easyrouter</p>
       <h1>Rotas</h1>
       <p class="subtitle">Busque, selecione e visualize novamente rotas persistidas.</p>
       <RouterLink class="secondary-button header-link" to="/">Nova rota</RouterLink>

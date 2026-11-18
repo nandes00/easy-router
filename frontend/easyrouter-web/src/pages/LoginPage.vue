@@ -1,14 +1,14 @@
 <template>
   <main class="login-page">
     <section class="login-card">
-      <p class="eyebrow">RouterMini</p>
+      <p class="eyebrow">easyrouter</p>
       <h1>Acessar sistema</h1>
       <p class="subtitle">Informe suas credenciais para continuar.</p>
 
       <form class="route-form" @submit.prevent="login">
         <label>
           E-mail
-          <input v-model="email" type="email" placeholder="admin@routermini.com" />
+          <input v-model="email" type="email" placeholder="admin@easyrouter.com" />
         </label>
 
         <label>
@@ -40,7 +40,7 @@ import { login as loginService } from '../services/auth.service';
 
 const router = useRouter();
 
-const email = ref('admin@routermini.com');
+const email = ref('admin@easyrouter.com');
 const password = ref('admin123');
 const errorMessage = ref('');
 const loading = ref(false);

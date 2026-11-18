@@ -8,7 +8,7 @@ export class UsersService implements OnModuleInit {
   constructor(private readonly userRepository: UserRepository) {}
 
   async onModuleInit() {
-    const email = 'admin@routermini.com';
+    const email = 'admin@easyrouter.com';
     const exists = await this.userRepository.findByEmail(email);
 
     if (!exists) {

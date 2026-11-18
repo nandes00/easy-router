@@ -132,9 +132,9 @@ Além dos requisitos principais do desafio, o sistema também implementa autenti
 ## Estrutura do projeto
 
 ```text
-routermini/
+easyrouter/
 ├── backend/
-│   └── routermini-api/
+│   └── easyrouter-api/
 │       ├── src/
 │       │   ├── database/
 │       │   ├── modules/
@@ -147,7 +147,7 @@ routermini/
 │       └── package.json
 │
 ├── frontend/
-│   └── routermini-web/
+│   └── easyrouter-web/
 │       ├── src/
 │       │   ├── apollo/
 │       │   ├── auth/
@@ -267,8 +267,8 @@ DATABASE_HOST=localhost
 DATABASE_PORT=5432
 DATABASE_USER=postgres
 DATABASE_PASSWORD=postgres
-DATABASE_NAME=routermini
-JWT_SECRET=routermini_dev_secret
+DATABASE_NAME=easyrouter
+JWT_SECRET=easyrouter_dev_secret
 JWT_EXPIRES_IN=1d
 GOOGLE_MAPS_API_KEY=sua_chave
 ```
@@ -295,7 +295,7 @@ GOOGLE_MAPS_API_KEY=sua_chave
 O projeto cria um usuário administrativo inicial no banco durante o boot da aplicação:
 
 ```text
-E-mail: admin@routermini.com
+E-mail: admin@easyrouter.com
 Senha: admin123
 ```
 

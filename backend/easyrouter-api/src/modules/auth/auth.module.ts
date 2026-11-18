@@ -15,7 +15,7 @@ import { UsersModule } from '../users/users.module';
     JwtModule.registerAsync({
       inject: [ConfigService],
         useFactory: (configService: ConfigService) => ({
-            secret: configService.get<string>('JWT_SECRET') ?? 'routermini_dev_secret',
+            secret: configService.get<string>('JWT_SECRET') ?? 'easyrouter_dev_secret',
             signOptions: {
                 expiresIn: (configService.get<string>('JWT_EXPIRES_IN') ?? '1d') as SignOptions['expiresIn'],
             },

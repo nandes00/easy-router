@@ -48,7 +48,7 @@ Autentica usuário.
 ```graphql
 mutation {
   login(input: {
-    email: "admin@routermini.com"
+    email: "admin@easyrouter.com"
     password: "admin123"
   }) {
     accessToken

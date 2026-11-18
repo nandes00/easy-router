@@ -1,7 +1,7 @@
 import { jwtDecode } from 'jwt-decode';
 import type { AuthUser } from '../types/auth';
 
-const TOKEN_KEY = 'routermini_access_token';
+const TOKEN_KEY = 'easyrouter_access_token';
 
 export function saveToken(token: string) {
   localStorage.setItem(TOKEN_KEY, token);

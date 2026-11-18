@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="app-header">
-      <RouterLink class="brand" to="/">RouterMini - App</RouterLink>
+      <RouterLink class="brand" to="/">easyrouter - App</RouterLink>
       <nav class="nav-links">
         <span class="user-greeting">Olá, {{ user?.name }}</span>
         <RouterLink to="/">Nova rota</RouterLink>

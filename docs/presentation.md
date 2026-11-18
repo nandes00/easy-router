@@ -8,7 +8,7 @@
 
 ## 1. Introdução
 
-Apresentar o RouterMini como uma aplicação Full Stack para cálculo, visualização e persistência de rotas.
+Apresentar o easyrouter como uma aplicação Full Stack para cálculo, visualização e persistência de rotas.
 
 ---
 

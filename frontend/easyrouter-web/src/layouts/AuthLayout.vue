@@ -1,7 +1,7 @@
 <template>
   <main class="auth-page">
     <section class="auth-brand">
-      <p class="eyebrow">RouterMini</p>
+      <p class="eyebrow">easyrouter</p>
       <h1>Planeje, visualize e salve suas rotas</h1>
       <p>
         Sistema full stack com Vue, NestJS, GraphQL, PostgreSQL, PostGIS e Google Maps.

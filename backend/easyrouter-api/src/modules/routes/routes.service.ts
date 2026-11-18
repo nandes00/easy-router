@@ -15,7 +15,7 @@ export class RoutesService {
   ) {}
 
   health(): string {
-    return 'RouterMini API Online';
+    return 'easyrouter API Online';
   }
 
   calculateRoute(input: CalculateRouteInput): Promise<CalculatedRouteType> {

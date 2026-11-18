@@ -2,7 +2,7 @@
 
 ## Estratégia
 
-A autenticação do RouterMini utiliza JWT.
+A autenticação do easyrouter utiliza JWT.
 
 ---
 

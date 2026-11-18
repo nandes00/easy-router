@@ -1,8 +1,8 @@
-# Arquitetura do RouterMini
+# Arquitetura do easyrouter
 
 ## Visão geral
 
-O RouterMini foi desenvolvido utilizando uma arquitetura modular com separação clara entre responsabilidades de interface, comunicação, aplicação, persistência e integrações externas.
+O easyrouter foi desenvolvido utilizando uma arquitetura modular com separação clara entre responsabilidades de interface, comunicação, aplicação, persistência e integrações externas.
 
 A arquitetura busca equilibrar simplicidade e qualidade. O objetivo não foi aplicar Clean Architecture de forma excessiva, mas sim utilizar boas práticas compatíveis com o tamanho do projeto.
 
@@ -151,7 +151,7 @@ No caso das rotas, o Repository é responsável por:
 
 O Gateway encapsula integração externa.
 
-No RouterMini, a integração com Google Maps fica isolada nesse conceito. Isso evita que a regra de negócio conheça detalhes da API externa.
+No easyrouter, a integração com Google Maps fica isolada nesse conceito. Isso evita que a regra de negócio conheça detalhes da API externa.
 
 Caso a API externa mude futuramente, o impacto fica concentrado nessa camada.
 
