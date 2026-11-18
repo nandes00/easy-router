@@ -1,4 +1,4 @@
-# RouterMini App
+# EasyRouter App
 
 Sistema Full Stack para cálculo, visualização e persistência de rotas usando **NestJS**, **GraphQL**, **Vue 3**, **TypeScript**, **PostgreSQL/PostGIS**, **Google Maps API**, **JWT** e **Docker**.
 
@@ -23,7 +23,7 @@ Sistema Full Stack para cálculo, visualização e persistência de rotas usando
 
 ## Sobre o projeto
 
-O **RouterMini** é uma aplicação Full Stack construída para receber um endereço de coleta e um endereço de entrega, calcular a rota utilizando a API do Google Maps, exibir o trajeto em um mapa incorporado e permitir a persistência da rota em banco de dados espacial.
+O **EasyRouter** é uma aplicação Full Stack construída para receber um endereço de coleta e um endereço de entrega, calcular a rota utilizando a API do Google Maps, exibir o trajeto em um mapa incorporado e permitir a persistência da rota em banco de dados espacial.
 
 O projeto foi desenvolvido seguindo uma arquitetura modular, com separação clara entre frontend, backend, autenticação, persistência, integração externa e documentação.
 
@@ -348,7 +348,3 @@ Arquivos complementares:
 - Deploy em nuvem.
 
 ---
-
-## Autor
-
-**Vitor Oliveira**
